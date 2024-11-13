@@ -9,6 +9,7 @@ import 'package:octo_image/octo_image.dart';
 /// the ImageProvider completes the image loading.
 typedef ImageWidgetBuilder = Widget Function(
   BuildContext context,
+  Widget child,
   ImageProvider imageProvider,
 );
 
@@ -293,7 +294,7 @@ class CachedNetworkImage extends StatelessWidget {
   }
 
   Widget _octoImageBuilder(BuildContext context, Widget child) {
-    return imageBuilder!(context, _image);
+    return imageBuilder!(context, child, _image);
   }
 
   Widget _octoPlaceholderBuilder(BuildContext context) {
