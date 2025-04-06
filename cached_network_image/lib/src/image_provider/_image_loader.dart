@@ -6,7 +6,7 @@ import 'dart:ui';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:cached_network_image_platform_interface'
         '/cached_network_image_platform_interface.dart' as platform
-    show ImageLoader;
+    show ImageLoader, CustomImageBytesDecoder;
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
@@ -25,6 +25,7 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage,
+    platform.CustomImageBytesDecoder? customDecoder,
   ) {
     return _load(
       url,
@@ -40,6 +41,7 @@ class ImageLoader implements platform.ImageLoader {
       headers,
       imageRenderMethodForWeb,
       evictImage,
+      customDecoder,
     );
   }
 
@@ -55,6 +57,7 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage,
+    platform.CustomImageBytesDecoder? customDecoder,
   ) {
     return _load(
       url,
@@ -70,6 +73,7 @@ class ImageLoader implements platform.ImageLoader {
       headers,
       imageRenderMethodForWeb,
       evictImage,
+      customDecoder,
     );
   }
 
@@ -84,6 +88,7 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage,
+    platform.CustomImageBytesDecoder? customDecoder,
   ) async* {
     try {
       assert(
@@ -121,8 +126,11 @@ class ImageLoader implements platform.ImageLoader {
         if (result is FileInfo) {
           final file = result.file;
           final bytes = await file.readAsBytes();
-          final decoded = await decode(bytes);
-          yield decoded;
+          if (customDecoder != null) {
+            yield await customDecoder(bytes, decode);
+          } else {
+            yield await decode(bytes);
+          }
         }
       }
     } on Object catch (e) {

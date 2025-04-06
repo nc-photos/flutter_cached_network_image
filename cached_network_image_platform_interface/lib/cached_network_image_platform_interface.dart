@@ -2,6 +2,7 @@
 library cached_network_image_platform_interface;
 
 import 'dart:async';
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -9,6 +10,10 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 /// Listener for errors
 typedef ErrorListener = void Function(Object);
+
+typedef ImageBytesDecoder = Future<ui.Codec> Function(Uint8List raw);
+typedef CustomImageBytesDecoder = Future<ui.Codec> Function(
+    Uint8List raw, ImageBytesDecoder decoder);
 
 /// Render options for images on the web platform.
 enum ImageRenderMethodForWeb {
@@ -37,6 +42,7 @@ class ImageLoader {
     Map<String, String>? headers,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage,
+    CustomImageBytesDecoder? customDecoder,
   ) {
     throw UnimplementedError();
   }
@@ -54,6 +60,7 @@ class ImageLoader {
     Map<String, String>? headers,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage,
+    CustomImageBytesDecoder? customDecoder,
   ) {
     throw UnimplementedError();
   }

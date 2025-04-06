@@ -27,6 +27,7 @@ void main() {
           null,
           ImageRenderMethodForWeb.HttpGet,
           () => {},
+          null,
         ),
         throwsA(const TypeMatcher<UnimplementedError>()),
       );

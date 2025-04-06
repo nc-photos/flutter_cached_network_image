@@ -3,7 +3,7 @@ import 'dart:ui' as ui show Codec;
 
 import 'package:cached_network_image/src/image_provider/multi_image_stream_completer.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart'
-    show ErrorListener, ImageRenderMethodForWeb;
+    show ErrorListener, ImageRenderMethodForWeb, CustomImageBytesDecoder;
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart'
     if (dart.library.io) '_image_loader.dart'
     if (dart.library.html) 'package:cached_network_image_web/cached_network_image_web.dart'
@@ -29,6 +29,7 @@ class CachedNetworkImageProvider
     this.cacheManager,
     this.cacheKey,
     this.imageRenderMethodForWeb = ImageRenderMethodForWeb.HtmlImage,
+    this.customDecoder,
   });
 
   /// CacheManager from which the image files are loaded.
@@ -59,6 +60,8 @@ class CachedNetworkImageProvider
 
   /// Render option for images on the web platform.
   final ImageRenderMethodForWeb imageRenderMethodForWeb;
+
+  final CustomImageBytesDecoder? customDecoder;
 
   @override
   Future<CachedNetworkImageProvider> obtainKey(
@@ -119,6 +122,7 @@ class CachedNetworkImageProvider
       headers,
       imageRenderMethodForWeb,
       () => PaintingBinding.instance.imageCache.evict(key),
+      customDecoder,
     );
   }
 
@@ -172,6 +176,7 @@ class CachedNetworkImageProvider
       headers,
       imageRenderMethodForWeb,
       () => PaintingBinding.instance.imageCache.evict(key),
+      customDecoder,
     );
   }
 
