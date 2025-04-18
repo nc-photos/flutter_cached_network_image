@@ -30,6 +30,7 @@ class CachedNetworkImageProvider
     this.cacheKey,
     this.imageRenderMethodForWeb = ImageRenderMethodForWeb.HtmlImage,
     this.customDecoder,
+    this.compareKey,
   });
 
   /// CacheManager from which the image files are loaded.
@@ -62,6 +63,9 @@ class CachedNetworkImageProvider
   final ImageRenderMethodForWeb imageRenderMethodForWeb;
 
   final CustomImageBytesDecoder? customDecoder;
+
+  /// Used to make two CachedNetworkImageProvider differ even if url is the same
+  final String? compareKey;
 
   @override
   Future<CachedNetworkImageProvider> obtainKey(
@@ -186,7 +190,8 @@ class CachedNetworkImageProvider
       return ((cacheKey ?? url) == (other.cacheKey ?? other.url)) &&
           scale == other.scale &&
           maxHeight == other.maxHeight &&
-          maxWidth == other.maxWidth;
+          maxWidth == other.maxWidth &&
+          compareKey == other.compareKey;
     }
     return false;
   }

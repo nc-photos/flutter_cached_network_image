@@ -242,6 +242,7 @@ class CachedNetworkImage extends StatelessWidget {
     ImageRenderMethodForWeb imageRenderMethodForWeb =
         ImageRenderMethodForWeb.HtmlImage,
     CustomImageBytesDecoder? customDecoder,
+    String? compareKey,
   }) : _image = CachedNetworkImageProvider(
           imageUrl,
           headers: httpHeaders,
@@ -252,6 +253,7 @@ class CachedNetworkImage extends StatelessWidget {
           maxHeight: maxHeightDiskCache,
           errorListener: errorListener,
           customDecoder: customDecoder,
+          compareKey: compareKey,
         );
 
   @override
