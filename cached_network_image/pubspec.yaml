@@ -17,12 +17,12 @@ dependencies:
   cached_network_image_platform_interface:
     git:
       url: https://github.com/nc-photos/flutter_cached_network_image.git
-      ref: v3.3.1-nc-photos-2
+      ref: v3.3.1-nc-photos-4
       path: cached_network_image_platform_interface
   cached_network_image_web:
     git:
       url: https://github.com/nc-photos/flutter_cached_network_image.git
-      ref: v3.3.1-nc-photos-2
+      ref: v3.3.1-nc-photos-4
       path: cached_network_image_web
   flutter:
     sdk: flutter
