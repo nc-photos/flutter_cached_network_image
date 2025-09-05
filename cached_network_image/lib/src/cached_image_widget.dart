@@ -241,7 +241,7 @@ class CachedNetworkImage extends StatelessWidget {
     this.errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb =
         ImageRenderMethodForWeb.HtmlImage,
-    CustomImageBytesDecoder? customDecoder,
+    CustomImageFilesDecoder? customDecoder,
     String? compareKey,
   }) : _image = CachedNetworkImageProvider(
           imageUrl,

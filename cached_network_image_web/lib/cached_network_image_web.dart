@@ -7,7 +7,7 @@ import 'dart:ui' as ui;
 
 import 'package:cached_network_image_platform_interface'
         '/cached_network_image_platform_interface.dart' as platform
-    show ImageLoader, ImageRenderMethodForWeb, CustomImageBytesDecoder;
+    show ImageLoader, ImageRenderMethodForWeb, CustomImageFilesDecoder;
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
@@ -26,7 +26,7 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     platform.ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage,
-    platform.CustomImageBytesDecoder? customDecoder,
+    platform.CustomImageFilesDecoder? customDecoder,
   ) {
     return _load(
       url,
@@ -57,7 +57,7 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     platform.ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage,
-    platform.CustomImageBytesDecoder? customDecoder,
+    platform.CustomImageFilesDecoder? customDecoder,
   ) {
     return _load(
       url,
